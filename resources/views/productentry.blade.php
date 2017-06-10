@@ -1,8 +1,8 @@
-@extends('layouts.app') <script src="{{ asset('js/jquery.min.js') }}"></script>
-<script src="{{ asset('js/jquery.validate.min.js') }}"></script>
-<script src="{{ asset('js/regis.js') }}"></script>
+@extends('layouts.app') 
 @section('title','Entry Product Here')
 @section('content')
+<script src="{{ asset('js/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('js/regis.js') }}"></script>
 <div class="container">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">

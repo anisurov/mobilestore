@@ -29,14 +29,12 @@ class ProductEntryController extends Controller
       
       
        $brand = DB::select('select brand_id from brand where brandname = "'.$brandname.'"');
-     // var_dump($brandID) ;
-     // echo "\n".$brandID[1]->brand_id;
       
       foreach ($brand as $key => $value) {
           $brandID = $value->brand_id;
       }
       
-      echo "\n".$brandID." model no ::".$modelno;
+     
       
 	  $model  = DB::select('select model_id from model where brand_id  = "'.$brandID
 	  .'" AND model_no ="'.$modelno.'"');
@@ -57,7 +55,8 @@ class ProductEntryController extends Controller
     }
 	
 	/*
-	 * this api func will be used to retrieve data from db to js
+	 * this api func will be used to retrieve data from db to js.
+     * 
 	 * @param $request will be used to get api call data
 	 *  
 	 * 

@@ -24,7 +24,7 @@ Route::post('/entry','ProductEntryController@create');
 Route::get('/api/{id}','ProductEntryController@api');
 
 Route::get('/sellproduct','SellProductController@index');
-Route::post('/sell','SellProductController@index');
+Route::post('/sell','SellProductController@sell');
 Route::post('/sapi','SellProductController@api');
 
 Route::get('/check','CheckAvailabilityController@index');

@@ -7,9 +7,11 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
+				
 				<div class="panel-heading">
 					Entry Product Here
 				</div>
+				
 				<div class="panel-body">
 					<form action="/sell" id="register" method="POST" class="form-horizontal">
 						{{ csrf_field() }}
@@ -30,74 +32,83 @@
 							</div>
 						</div>
 
-						<div class="form-group col-lg-3" style="margin-right:2px">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-plus"></i> Brand
+						<div id="products">
+							<div class="add" id="product">
+
+								<div class="form-group col-lg-3" style="margin-right:2px">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-plus"></i> Brand
+										</div>
+										<select name="brandname[]" id="1" class="form-control brand">
+											<option value="">Select brand</option>
+											@foreach($brandnames as $brandname)
+											<option value="{{$brandname->brandname}}">{{$brandname->brandname}}</option>
+											@endforeach
+										</select>
+									</div>
+									<span class="help-block" id="error"></span>
 								</div>
-								<select name="brandname" class="form-control">
-									<option value="">Select brand</option>
-									@foreach($brandnames as $brandname)
-									<option value="{{$brandname->brandname}}">{{$brandname->brandname}}</option>
-									@endforeach
-								</select>
-							</div>
-							<span class="help-block" id="error"></span>
-						</div>
 
-						<div class="form-group col-lg-3" style="margin-right: 2px">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-plus"></i> Brand
+								<div class="form-group col-lg-3" style="margin-right: 2px">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-plus"></i> Model
+										</div>
+										<select name="modelno[]" class="form-control model" id="1">
+
+											<option value="">Select Model</option>
+
+										</select>
+									</div>
+									<span class="help-block" id="error"></span>
 								</div>
-								<select name="modelno" class="form-control">
 
-									<option value="">Select Model</option>
-
-								</select>
-							</div>
-							<span class="help-block" id="error"></span>
-						</div>
-
-						<div class="form-group col-lg-3" style="margin-right: 2px">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-plus"></i> Amount
+								<div class="form-group col-lg-3" style="margin-right: 2px">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-plus"></i> Amount
+										</div>
+										<input type="text" name="amount[]" id="1" class="form-control amount">
+									</div>
+									<span class="help-block" id="error"></span>
 								</div>
-								<input type="text" name="amount" id="task-name" class="form-control">
+
+								<div class="form-group col-lg-3" style="margin-right: 3px">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-plus"></i> Unit Price
+										</div>
+										<input type="text" name="price[]" id="1" class="form-control">
+									</div>
+									<span class="help-block" id="error"></span>
+								</div>
 							</div>
-							<span class="help-block" id="error"></span>
 						</div>
 
 						<div class="form-group">
-							<div class="form-group col-lg-3" style="margin-right: 3px">
-								<div class="input-group">
-									<div class="input-group-addon">
-										<i class="fa fa-plus"></i> Unit Price
-									</div>
-									<input type="text" name="price" id="task-name" class="form-control">
-								</div>
-								<span class="help-block" id="error"></span>
+							<label for="SellProduct" class="col-sm-4 control-label">Total price :</label>
+							<div class="col-sm-4">
+								<input type="text" name="total" id="task-name" class="form-control">
 							</div>
+						</div>
 
-							<div class="form-group">
-								<label for="SellProduct" class="col-sm-4 control-label">Total price :</label>
-								<div class="col-sm-4">
-									<input type="text" name="total" id="task-name" class="form-control">
-								</div>
+						<div class="form-group">
+							<div class="col-sm-offset-3 col-sm-1">
+								<input type="button" value="+" name="add" id="task-name" class="btn addmore">
 							</div>
+						</div>
 
-							<div class="form-group">
-								<div class="col-sm-offset-3 col-sm-6">
-									<button type="submit" class="btn btn-default">
-										<i class="fa fa-plus"></i> Done
-									</button>
-								</div>
+						<div class="form-group">
+							<div class="col-sm-offset-3 col-sm-6">
+								<button type="submit" class="btn btn-primary">
+									<i class="fa fa-plus"></i> Done
+								</button>
 							</div>
+						</div>
 
 					</form>
 				</div>
-
 			</div>
 		</div>
 	</div>

@@ -25,7 +25,6 @@ $('document').ready(function() {
 
 				success : function(data) {
 
-
 					$.each(data, function(i, value) {
 
 						console.log(value.name);
@@ -40,12 +39,30 @@ $('document').ready(function() {
 
 	});
 
-	$('select[name="brandname"]').on('change', function() {
+	$('input[name="add"]').on('click', function() {
+		var cloned = $('#product').clone(true);
+		var length = $('.add').length;
+		console.log(length);
+		var ou = cloned.find('select[name="brandname[]"]').attr('id', length + 1);
+		var ou = cloned.find('select[name="modelno[]"]').attr('id', length + 1);
+		var ou = cloned.find('input[name="price[]"]').attr('id', length + 1);
+		var ou = cloned.find('input[name="amount[]"]').attr('id', length + 1);
+		console.log(ou);
+		$('#products').append(cloned);
+		$('#products').off();
+	});
 
+	$('.brand').change(function() {
+
+		console.log('ovii');
 		var stateID = $(this).val();
+		var ID = $(this).attr('id');
+
+		console.log(ID);
+		console.log('ovii');
 		console.log(stateID);
 
-		if (stateID) {
+		if (stateID != '') {
 
 			$.ajax({
 
@@ -63,38 +80,47 @@ $('document').ready(function() {
 
 				success : function(data) {
 
-					
-
 					console.log("returned data" + data);
 
-					$.each(data, function(i, value) {
+					if (!$.isEmptyObject(data)) {
+						$.each(data, function(i, value) {
 
-						console.log(value.model_no);
-						$('select[name="modelno"]').append('<option value="' + value.model_no + '">' + value.model_no + '</option>');
+							console.log(value.model_no);
+							$('select[name="modelno[]"][id="' + ID + '"]').append('<option value="' + value.model_no + '">' + value.model_no + '</option>');
 
-					});
+						});
+					} else {
+
+						$('select[name="modelno[]"][id="' + ID + '"]').empty();
+						$('select[name="modelno[]"][id="' + ID + '"]').append('<option value="">Select Model</option>');
+					}
 
 				}
 			});
 
-		} 
+		} else {
+
+			$('select[name="modelno[]"][id="' + ID + '"]').empty();
+			$('select[name="modelno[]"][id="' + ID + '"]').append('<option value="">Select Model</option>');
+		}
 
 	});
 
-	$('select[name="modelno"]').on('change', function() {
+	$('.model').on('change', function() {
 
-		var stateID = $(this).val();
-		console.log(stateID);
+		var modelName = $(this).val();
+		var ID = $(this).attr('id');
+		console.log(ID);
 
-		if (stateID) {
+		if (modelName!='') {
 
 			$.ajax({
 
 				url : '/sapi',
 				type : "POST",
 				data : {
-					modelno : stateID,
-					brandname : $('select[name="brandname"]').val()
+					modelno : modelName,
+					brandname : $('select[name="brandname[]"][id="' + ID + '"]').val()
 				},
 
 				headers : {
@@ -105,15 +131,15 @@ $('document').ready(function() {
 
 				success : function(data) {
 
-					//$('input[name="price"]').val('');
+					//$('input[name="price[]"]').val('');
 
 					console.log("returned data" + data);
 
 					$.each(data, function(i, value) {
 
 						console.log(value.sellprice);
-						//$('input[name="price"]').append('<option value="' + value.sellprice + '">' + value.model_no + '</option>');
-						$('input[name="price"]').val(value.sellprice);
+						//$('input[name="price[]"]').append('<option value="' + value.sellprice + '">' + value.model_no + '</option>');
+						$('input[name="price[]"][id="' + ID + '"]').val(value.sellprice);
 
 					});
 
@@ -122,23 +148,28 @@ $('document').ready(function() {
 
 		} else {
 
-			$('input[name="price"]').val('');
+			$('input[name="price[]"][id="' + ID + '"]').val('');
 		}
 
 	});
+
+	$('.amount').on('change', function() {
+		var loopTotalIndex = $('.add').length;
+		var loopIndex;
+		var amount;
+		var price;
+		var total=0;
+		console.log(loopTotalIndex);
+		for(loopIndex = 1 ;loopIndex <= loopTotalIndex ; loopIndex++){
+			 amount = $('input[name="amount[]"][id="' + loopIndex + '"]').val();
+			 price = $('input[name="price[]"][id="' + loopIndex + '"]').val();
 	
-	$('input[name="amount"]').on('change', function() {
-
-		var amount = $(this).val();
-		var price = $('input[name="price"]').val();
-
-		if (amount && price) {
-
-			var total= amount*price;
-			$('input[name="total"]').val(total);
+			if (amount && price) {
+	
+				total = total + amount * price;				
+			}
 		}
-		
-		
+		$('input[name="total"]').val(total);
 
 	});
 
@@ -190,8 +221,8 @@ $('document').ready(function() {
 				validno : "Enter Valid Mobile Number"
 			},
 			price : {
-				required : "Please Enter Email Address",
-				numeric : "Enter Valid Email Address"
+				required : "Please Enter price",
+				numeric : "Enter Valid Price"
 			},
 			cname : {
 				required : "Please Enter Name",
@@ -215,4 +246,4 @@ $('document').ready(function() {
 		}
 	});
 
-}); 
+});

@@ -30,7 +30,9 @@ Route::post('/sapi','SellProductController@api');
 Route::get('/check','CheckAvailabilityController@index');
 Route::get('/reportdate','DateWiseReportController@index');
 Route::get('/reportmonthly','MonthlyReportController@index');
-
+Route::get('/brand','BrandnameController@index');
+Route::post('/brandEntry','BrandnameController@brand');
+Route::post('/model','ModelController@index');
 
 
 Route::resource('home','SysController');

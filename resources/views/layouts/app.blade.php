@@ -70,7 +70,21 @@
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
+                                        
                                     </li>
+                                     <li>
+                                        <a href="/brand">
+                                            Add Brand
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/model">
+                                            Add Model
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="dropdown-menu" role="menu">
+                                   
                                 </ul>
                             </li>
                         @endif

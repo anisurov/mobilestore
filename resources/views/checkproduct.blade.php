@@ -1,48 +1,47 @@
-@extends('layouts.app')
-@section('title','Entry Product Here')  
+@extends('layouts.app') 
+@section('title','Entry Product Here')
 @section('content')
- <div class="panel-body">
+ <div class="container">
+      <div class="row">
+        <div class="col-xs-6">
+          <h1>
+            {{ config('app.name') }}
+          </h1>
+        </div>
+        <div class="col-xs-6 text-right">
+          <h1>INVOICE</h1>
+        </div>
+      </div>
+      <hr/>
+      <!-- / end client details section -->
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>
+              <h4>Serial No.</h4>
+            </th>
+            <th>
+              <h4>Brand Name</h4>
+            </th>
+            <th>
+              <h4>Model No.</h4>
+            </th>
+            <th>
+              <h4>Amount</h4>
+            </th>
+            <th>
+              <h4>Price</h4>
+            </th>
+          </tr>
+        </thead>
+      </table>
+      <div class="row text-right">
+        <div class="col-xs-2 col-xs-offset-8">
+          <p>
 
-        <!-- New Task Form -->
-        <form action="/EntryProduct" method="POST" class="form-horizontal">
-            {{ csrf_field() }}
-
-            <!-- Task Name -->
-            <div class="form-group">
-                <label for="EntryProduct" class="col-sm-3 control-label">Brand Name :</label>
-
-                <div class="col-sm-6">
-                    <input type="text" name="name" id="task-name" class="form-control">
-                </div>
-            </div>
-           <div class="form-group">
-                <label for="EntryProduct" class="col-sm-3 control-label"> Model No. :</label>
-
-                <div class="col-sm-6">
-                    <input type="text" name="name" id="task-name" class="form-control">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="EntryProduct" class="col-sm-3 control-label">Amount :</label>
-
-                <div class="col-sm-6">
-                    <input type="text" name="name" id="task-name" class="form-control">
-                </div>
-            </div>
-                <div class="form-group">
-                <label for="EntryProduct" class="col-sm-3 control-label">Price :</label>
-
-                <div class="col-sm-6">
-                    <input type="text" name="name" id="task-name" class="form-control">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-6">
-                    <button type="submit" class="btn btn-default">
-                        <i class="fa fa-plus"></i> Submit
-                    </button>
-                </div>
-            </div>
-        </form>
+          </p>
+        </div>
+      </div>
+      <hr />
     </div>
 @endsection

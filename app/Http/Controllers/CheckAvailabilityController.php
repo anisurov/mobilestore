@@ -13,6 +13,6 @@ class CheckAvailabilityController extends Controller
 	
 	public function index()
     {
-      return view('productentry');
+      return view('checkproduct');
     }
 }

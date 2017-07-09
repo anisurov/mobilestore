@@ -28,11 +28,13 @@ Route::post('/sell','SellProductController@sell');
 Route::post('/sapi','SellProductController@api');
 
 Route::get('/check','CheckAvailabilityController@index');
+Route::get('/checkproduct','CheckAvailabilityController@check');
 Route::get('/reportdate','DateWiseReportController@index');
 Route::get('/reportmonthly','MonthlyReportController@index');
 Route::get('/brand','BrandnameController@index');
 Route::post('/brandEntry','BrandnameController@brand');
-Route::post('/model','ModelController@index');
+Route::get('/model','ModelController@index');
+Route::post('/modelEntry','ModelController@model');
 
 
 Route::resource('home','SysController');

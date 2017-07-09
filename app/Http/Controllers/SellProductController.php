@@ -36,7 +36,7 @@ class SellProductController extends Controller {
 				$mid = $value -> model_id;
 			}
 
-			$price = DB::select('select sellprice from product_entry where brand_id  =(select brand_id from brand ' . 'where brandname="' . $bid . '") and model_id = "' . $mid . '"');
+			$price = DB::select('select sellprice from present_condition where brand_id  =(select brand_id from brand ' . 'where brandname="' . $bid . '") and model_id = "' . $mid . '"');
 
 			return json_encode($price);
 		} elseif ($request -> input('mblno')) {
@@ -91,7 +91,7 @@ class SellProductController extends Controller {
 			}
 			
 			
-			$amountInDB = DB::select('select amount from product_entry where brand_id="' . $brandID . '" and model_id ="' . $modelID . '"');
+			$amountInDB = DB::select('select amount from present_condition where brand_id="' . $brandID . '" and model_id ="' . $modelID . '"');
 
 		//var_dump($model);
 		if ($amountInDB) {
@@ -105,14 +105,14 @@ class SellProductController extends Controller {
 				$amount = 0;
 			}
 		}
-		$buyPriceInDB = DB::select('select buyprice from product_entry where brand_id="' . $brandID . '" and model_id ="' . $modelID . '"');
+		$buyPriceInDB = DB::select('select buyprice from present_condition where brand_id="' . $brandID . '" and model_id ="' . $modelID . '"');
 		foreach ($buyPriceInDB as $key => $value) {
 				$buyprice = $value -> buyprice;
 			}
 		$data = array('brand_id' => $brandID, 'model_id' => $modelID, 'buyprice' => $buyprice,
 		 'sellprice' => $sellprice[$index], 'amount' => $amounts[$index],'customer_id'=>$customerID);
 		
-		DB::select('update product_entry set amount="'.$amount.'" where brand_id="' . $brandID . '" and model_id ="' . $modelID . '"');
+		DB::select('update present_condition set amount="'.$amount.'" where brand_id="' . $brandID . '" and model_id ="' . $modelID . '"');
 		
 		DB::table('product_sell') -> insert($data);	 
 		}

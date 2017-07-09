@@ -28,7 +28,7 @@ Route::post('/sell','SellProductController@sell');
 Route::post('/sapi','SellProductController@api');
 
 Route::get('/check','CheckAvailabilityController@index');
-Route::get('/checkproduct','CheckAvailabilityController@check');
+Route::post('/checkproduct','CheckAvailabilityController@check');
 Route::get('/reportdate','DateWiseReportController@index');
 Route::get('/reportmonthly','MonthlyReportController@index');
 Route::get('/brand','BrandnameController@index');

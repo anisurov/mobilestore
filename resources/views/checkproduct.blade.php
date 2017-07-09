@@ -2,7 +2,7 @@
 @section('title','Available Product')
 @section('content')
 <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
-<script src="{{ asset('js/regis.js') }}"></script>
+<script src="{{ asset('js/availProduct.js') }}"></script>
 <div class="container">
     <div class="row">
         <div class="col-xs-6">
@@ -17,6 +17,7 @@
     <div class="row">
         <div class="col-xs-6">
     <div class="panel-body">
+    	{{ csrf_field() }}
     <div class="form-group">
         <label for="brandname" class="col-md-4 control-label">Brand Name</label>
         <div class="col-md-6">
@@ -40,7 +41,7 @@
         <label for="modelno" class="col-md-4 control-label">Model No.</label>
         <div class="col-md-6">
             <select name="modelno" class="form-control" style="width:350px">
-
+				<option value="">--- Select Model ---</option>
             </select>
         </div>
     </div>
@@ -69,6 +70,7 @@
         </th>
         </tr>
         </thead>
+        <tbody id="tbody">
         <?php
         foreach ($data as $key => $value) {
             $brandID = $value->brand_id;
@@ -94,7 +96,7 @@
          </tr> ';
         }
         ?>
-
+		</tbody>
     </table>
     <div class="row text-right">
         <div class="col-xs-2 col-xs-offset-8">

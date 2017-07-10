@@ -66,7 +66,7 @@
 								<button type="submit" class="btn btn-primary">
 									Done
 								</button>
-								<button type="submit" class="btn btn-primary">
+								<button type="submit" name="addm" value="true" class="btn btn-primary">
 									Add more ?
 								</button>
 							</div>

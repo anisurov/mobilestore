@@ -87,15 +87,17 @@
             $buyprice = $value->buyprice;
             $sellprice = $value->sellprice;
             $sl = $key + 1;
+            if($sl&&$brandnames&&$models&&$amount&&$buyprice){
             echo ' <tr>
             <td>' . $sl . '</td>
             <td>' . $brandname . '</td>
             <td class="text-right">' . $model . '</td>
             <td class="text-right">' . $amount . '</td>
             <td class="text-right">' . $buyprice . '</td>
-         </tr> ';
+            </tr> ';}
         }
         ?>
+          
 		</tbody>
     </table>
     <div class="row text-right">

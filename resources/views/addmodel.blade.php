@@ -6,15 +6,28 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Entry Brand Name Here
+                    Entry Model No Here
                 </div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action='brandEntry'>
+                    <form class="form-horizontal" role="form" method="POST" action='modelEntry'>
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="brandname" class="col-md-4 control-label">Brand Name</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="brandname">
+                                <select name="brandname" class="form-control" style="width:350px">
+                                    <option value="">--- Select brand ---</option>
+
+                                    @foreach($brandnames as $brandname)
+                                    <option value="{{$brandname->brandname}}">{{$brandname->brandname}}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="modelno" class="col-md-4 control-label">Model No.</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="modelno">
                                 <span class="help-block" id="error"></span>
                             </div>
                         </div>
@@ -37,11 +50,11 @@
                     Existed Brand
                 </div>
                 <div class="panel-body">
-                    
+
                     <table class="table table-bordered">
                         <tr>
-                            
-                        @foreach($brandnames as $brandname)
+
+                            @foreach($brandnames as $brandname)
                         <tr><td>{{$brandname->brandname}}</td></tr>
                         @endforeach
                         </tr>

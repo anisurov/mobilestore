@@ -37,9 +37,14 @@ class ProductEntryController extends Controller {
 			$modelID = $value -> model_id;
 		}
 		// echo "string::".$modelID;
+		
+		$data = array('brand_id' => $brandID, 'model_id' => $modelID, 'buyprice' => $buyprice,
+		 'sellprice' => $sellprice, 'amount' => $amount);
+		 
+		 
 
-		$amounts = DB::select('select amount from product_entry where brand_id="' . $brandID . '" and model_id ="' . $modelID . '"');
-
+		$amounts = DB::select('select amount from present_condition where brand_id="' . $brandID . '" and model_id ="' . $modelID . '"');
+		DB::table('product_entry') -> insert($data);
 		//var_dump($model);
 		if ($amounts) {
 
@@ -54,9 +59,9 @@ class ProductEntryController extends Controller {
 
 		$data = array('brand_id' => $brandID, 'model_id' => $modelID, 'buyprice' => $buyprice, 'sellprice' => $sellprice, 'amount' => $amount);
 		if ($amounts) {
-			DB::table('product_entry') -> update($data);
+			DB::table('present_condition') -> update($data);
 		}else{
-		DB::table('product_entry') -> insert($data);}
+		DB::table('present_condition') -> insert($data);}
 
 		Session::flash('success', 'Your Product Entry was Successful!!');
 

@@ -48,8 +48,8 @@ $('document').ready(function() {
 		var ou = cloned.find('input[name="price[]"]').attr('id', length + 1);
 		var ou = cloned.find('input[name="amount[]"]').attr('id', length + 1);
 		console.log(ou);
-		$('#products').append(cloned);
-		$('#products').off();
+		$('#products').append(cloned).value('');
+		
 	});
 
 	$('.brand').change(function() {
@@ -176,6 +176,7 @@ $('document').ready(function() {
 	var MobileNumberRegex = /^[0][1][5-9][0-9][0-9](\d{6})$/;
 
 	$.validator.addMethod("validno", function(value, element) {
+		console.log(value);
 		return this.optional(element) || MobileNumberRegex.test(value);
 	});
 
@@ -194,11 +195,12 @@ $('document').ready(function() {
 	$("#register").validate({
 
 		rules : {
+			ignore: [],
 			cmobileNum : {
 				required : true,
 				validno : true
 			},
-			amount : {
+			'amount[]' : {
 				required : true,
 				numeric : true
 			},
@@ -212,7 +214,7 @@ $('document').ready(function() {
 			},
 		},
 		messages : {
-			amount : {
+			'amount[]' : {
 				required : "Please Enter Amount Of Product",
 				numeric : "Enter Valid Amount"
 			},

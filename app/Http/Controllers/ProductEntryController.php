@@ -37,11 +37,8 @@ class ProductEntryController extends Controller {
 			$modelID = $value -> model_id;
 		}
 		// echo "string::".$modelID;
-		
-		$data = array('brand_id' => $brandID, 'model_id' => $modelID, 'buyprice' => $buyprice,
-		 'sellprice' => $sellprice, 'amount' => $amount);
-		 
-		 
+
+		$data = array('brand_id' => $brandID, 'model_id' => $modelID, 'buyprice' => $buyprice, 'sellprice' => $sellprice, 'amount' => $amount);
 
 		$amounts = DB::select('select amount from present_condition where brand_id="' . $brandID . '" and model_id ="' . $modelID . '"');
 		DB::table('product_entry') -> insert($data);
@@ -59,13 +56,20 @@ class ProductEntryController extends Controller {
 
 		$data = array('brand_id' => $brandID, 'model_id' => $modelID, 'buyprice' => $buyprice, 'sellprice' => $sellprice, 'amount' => $amount);
 		if ($amounts) {
-			DB::table('present_condition') -> update($data);
-		}else{
-		DB::table('present_condition') -> insert($data);}
+			DB::select('update present_condition set amount="' . $amount . '",buyprice="' . $buyprice . '",
+			sellprice="' . $sellprice . '" where brand_id="' . $brandID . '" and model_id ="' . $modelID . '"');
+		} else {
+			DB::table('present_condition') -> insert($data);
+		}
+		if ($request -> input('addm') == 'true') {
+			$brandnames = DB::select('select brandname from brand');
+			return view('productentry', compact('brandnames'));
+		} else {
 
-		Session::flash('success', 'Your Product Entry was Successful!!');
+			Session::flash('success', 'Your Product Entry was Successful!!');
 
-		return redirect() -> route('home.index');
+			return redirect() -> route('home.index');
+		}
 	}
 
 	/*

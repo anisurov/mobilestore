@@ -2,7 +2,6 @@
 @section('title','Entry Product Here')
 @section('content')
 <link href="{{ asset('bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" type="text/css">
-<link href="{{ asset('jquery-ui/jquery-ui.min.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('css/components.css') }}" rel="stylesheet" type="text/css">
 <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('js/availProduct.js') }}"></script>
@@ -65,10 +64,10 @@
 	<hr />
 </div>
 <script type="text/javascript">
-	jQuery("#from_date, #to_date").datepicker({
+	jQuery("#from_date, #to_date").datetimepicker({
 		autoclose : true,
 		isRTL : Metronic.isRTL(),
-		format : "yyyy-mm-dd",
+		dateFormat: "yy-mm-dd",
 		pickerPosition : (Metronic.isRTL() ? "bottom-right" : "bottom-left")
 	});
 	jQuery("#submit_form").on("click", function() {

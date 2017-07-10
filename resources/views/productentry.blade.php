@@ -66,7 +66,9 @@
 								<button type="submit" class="btn btn-primary">
 									Done
 								</button>
-								<a class="btn btn-link" href="productentry"> Add more ? </a>
+								<button type="submit" class="btn btn-primary">
+									Add more ?
+								</button>
 							</div>
 						</div>
 

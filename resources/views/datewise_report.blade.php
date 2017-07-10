@@ -37,30 +37,17 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-xs-6">
-			<div class="panel-body">
-				<div class="form-group">
-					<label for="modelno" class="col-md-4 control-label">Model No.</label>
-					<div class="col-md-6">
-						<select name="modelno" class="form-control" style="width:350px">
-							<option value="">--- Select Model ---</option>
-						</select>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 	<hr/>
 	<!-- / end client details section -->
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th><h4>Serial No.</h4></th>
-				<th><h4>Brand Name</h4></th>
-				<th><h4>Model No.</h4></th>
-				<th><h4>Amount</h4></th>
-				<th><h4>Price</h4></th>
+				<th><h4 class="text-center">Serial No.</h4></th>
+                                <th><h4 class="text-center">Transaction</h4></th>
+				<th><h4 class="text-center">Brand Name</h4></th>
+				<th><h4 class="text-center">Model No.</h4></th>
+				<th><h4 class="text-center">Amount</h4></th>
+				<th><h4 class="text-center">Price</h4></th>
 			</tr>
 		</thead>
 		<tbody id="tbody">

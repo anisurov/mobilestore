@@ -13,6 +13,6 @@ class  MonthlyReportController extends Controller
 	
 	public function index()
     {
-      return view('productentry');
+      return view('monthly_report');
     }
 }

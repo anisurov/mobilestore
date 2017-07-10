@@ -54,19 +54,19 @@
         <thead>
             <tr>
                 <th>
-        <h4>Serial No.</h4>
+        <h4 class="text-center">Serial No.</h4>
         </th>
         <th>
-        <h4>Brand Name</h4>
+        <h4 class="text-center">Brand Name</h4>
         </th>
         <th>
-        <h4>Model No.</h4>
+        <h4 class="text-center">Model No.</h4>
         </th>
         <th>
-        <h4>Amount</h4>
+        <h4 class="text-center">Amount</h4>
         </th>
         <th>
-        <h4>Price</h4>
+        <h4 class="text-center">Price</h4>
         </th>
         </tr>
         </thead>
@@ -89,11 +89,11 @@
             $sl = $key + 1;
             if($sl&&$brandnames&&$models&&$amount&&$buyprice){
             echo ' <tr>
-            <td>' . $sl . '</td>
-            <td>' . $brandname . '</td>
-            <td class="text-right">' . $model . '</td>
-            <td class="text-right">' . $amount . '</td>
-            <td class="text-right">' . $buyprice . '</td>
+            <td class="text-center">' . $sl . '</td>
+            <td class="text-center">' . $brandname . '</td>
+            <td class="text-center">' . $model . '</td>
+            <td class="text-center">' . $amount . '</td>
+            <td class="text-center">' . $buyprice . '</td>
             </tr> ';}
         }
         ?>

@@ -19,6 +19,7 @@
 	</div>
 	<div class="row">
 		<div class="panel-body">
+                    <form class="form-horizontal" id="register" role="form" method="POST" action="reportdate2">
 				{{ csrf_field() }}
 				<div class="col-md-6">
 					<div class="input-group input-xlarge datetimepicker">
@@ -34,6 +35,7 @@
 							<i class="fa fa-search"></i>
 						</button> </span>
 				</div>
+                    </form>
 			</div>
 		</div>
 	</div>
@@ -51,7 +53,7 @@
 			</tr>
 		</thead>
 		<tbody id="tbody">
-
+      
 		</tbody>
 	</table>
 	<div class="row text-right">

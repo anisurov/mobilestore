@@ -2,7 +2,6 @@
 @section('title','Entry Product Here')
 @section('content')
 <link href="{{ asset('bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" type="text/css">
-<link href="{{ asset('jquery-ui/jquery-ui.min.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('css/components.css') }}" rel="stylesheet" type="text/css">
 <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('js/availProduct.js') }}"></script>
@@ -20,6 +19,7 @@
 	</div>
 	<div class="row">
 		<div class="panel-body">
+                    <form class="form-horizontal" id="register" role="form" method="POST" action="reportmonthly2">
 				{{ csrf_field() }}
 				<div class="col-md-6">
 					<div class="input-group input-xlarge datetimepicker">
@@ -35,6 +35,7 @@
 							<i class="fa fa-search"></i>
 						</button> </span>
 				</div>
+                    </form>
 			</div>
 		</div>
 	</div>
@@ -44,14 +45,15 @@
 		<thead>
 			<tr>
 				<th><h4 class="text-center">Serial No.</h4></th>
-                                <th><h4 class="text-center">Date</h4></th>
                                 <th><h4 class="text-center">Transaction</h4></th>
-				<th><h4 class="text-center">Product Amount</h4></th>
-				<th><h4 class="text-center">Net Price</h4></th>
+				<th><h4 class="text-center">Brand Name</h4></th>
+				<th><h4 class="text-center">Model No.</h4></th>
+				<th><h4 class="text-center">Amount</h4></th>
+				<th><h4 class="text-center">Price</h4></th>
 			</tr>
 		</thead>
 		<tbody id="tbody">
-
+      
 		</tbody>
 	</table>
 	<div class="row text-right">
@@ -64,10 +66,10 @@
 	<hr />
 </div>
 <script type="text/javascript">
-	jQuery("#from_date, #to_date").datepicker({
+	jQuery("#from_date, #to_date").datetimepicker({
 		autoclose : true,
 		isRTL : Metronic.isRTL(),
-		format : "yyyy-mm-dd",
+		dateFormat: "yy-mm-dd",
 		pickerPosition : (Metronic.isRTL() ? "bottom-right" : "bottom-left")
 	});
 	jQuery("#submit_form").on("click", function() {

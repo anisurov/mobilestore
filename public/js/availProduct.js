@@ -23,10 +23,9 @@ $('document').ready(function() {
 				success : function(data) {
 
 					if (!$.isEmptyObject(data)) {
+						$('select[name="modelno"]').empty();
+						$('select[name="modelno"]').append('<option value="">Select Model</option>');
 						$.each(data, function(i, value) {
-
-							$('select[name="modelno"]').empty();
-							$('select[name="modelno"]').append('<option value="">Select Model</option>');
 							console.log(value.model_no);
 							$('select[name="modelno"]').append('<option value="' + value.model_no + '">' + value.model_no + '</option>');
 

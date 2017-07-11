@@ -18,12 +18,29 @@ class DateWiseReportController extends Controller
     }
      public function report(Request $request)
     {
-        $fromdata=$request-> input('from_date');
-        $todate=$request -> input('to_date');
+        $fromdata=$request-> input('fromdate');
+        $todate=$request -> input('todate');
         $data=DB::select('select * from product_entry where date>="'.$fromdata.'" && date<="'.$todate.'"');
+        //$returnData=  array();
+       
         if($data)
         {    
-        return view('home');
+             foreach ($data as $key => $value) {
+                $modelid = $value->model_id;
+                $brandid = $value->brand_id;
+                $brandnames=DB::select('select brandname from brand where brand_id="'.$brandid.'"');
+                   foreach ($brandnames as $key1 => $value1) {
+                $brandname = $value1->brandname;
+            }
+                 $models = DB::select('select model_no from model where brand_id  = "' . $brandid . '" AND model_id ="' . $modelid . '"');
+                  foreach ($models as $key2 => $value2) {
+                $model = $value2->model_no;
+            }
+             
+            $returnData[$key]= array('brandname'=>$brandname,'modelno'=>$model,'amount'=>$value->amount,'buyprice'=>$value->buyprice);
+             
+            }
+       return json_encode($returnData);
         }
         else
         {

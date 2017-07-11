@@ -9,8 +9,6 @@ class  MonthlyReportController extends Controller
     public function __construct(){
         $this->middleware('auth');
     }
-	
-	
 	public function index()
     {
       return view('monthly_report');
@@ -18,16 +16,33 @@ class  MonthlyReportController extends Controller
     public function report(Request $request)
     {
            $fromdata=$request-> input('fromdate');
-           $time = new DateTime($fromdata);
-        $todate=$request -> input('todate');
-        $date = $fromdata->format('n.j.Y');
-        echo $date;
-//$time = $time->format('H:i');
-        $data=DB::select('select * from product_entry where date>="'.$fromdata.'" && date<="'.$todate.'"');
-        var_dump($data);
+             $todate=$request-> input('todate');
+       
+        $data=DB::select('select date(date) as date,sum(sellprice*amount) as price,sum(amount) as amount from product_sell where '
+                . 'date>= "' . $fromdata . '" AND date<="' . $todate . '" group by date(date)');
+        //var_dump($data);
         if($data)
         {    
-        return view('monthly_report');
+             $i=0;
+         foreach ($data as $key => $value) {
+
+                $date = $value->date;
+                $price = $value->price;
+                $amount = $value->amount;
+                    $returnData[$i] = array('transaction' => 'sell','date' => $date, 'price' => $price, 'amount' => $value->amount);
+            $i=$i+1;
+         }
+          $data=DB::select('select date(date) as date,sum(sellprice*amount) as price,sum(amount) as amount from product_entry where '
+                . 'date>= "' . $fromdata . '" AND date<="' . $todate . '" group by date(date)');
+                   foreach ($data as $key => $value) {
+
+                $date = $value->date;
+                $price = $value->price;
+                $amount = $value->amount;
+                    $returnData[$i] = array('transaction' => 'buy','date' => $date, 'price' => $price, 'amount' => $value->amount);
+            $i=$i+1;
+         }
+         return json_encode($returnData);
         }
         else
         {

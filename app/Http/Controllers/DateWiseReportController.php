@@ -18,6 +18,7 @@ class DateWiseReportController extends Controller {
     public function report(Request $request) {
         $fromdata = $request->input('fromdate');
         $todate = $request->input('todate');
+
         $data = DB::select('select * from product_entry where date>="' . $fromdata . '" && date<="' . $todate . '"');
         //$returnData=  array();
           $i=0;

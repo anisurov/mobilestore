@@ -29,13 +29,6 @@
 						<input type="text" name="to_date" id="to_date"  class="form-control text-center" value="" placeholder="To date"/>
 					</div>
 				</div>
-
-				<div class="col-md-2">
-					<span class="input-group-btn">
-						<button type="submit" id="submit_form" class="btn blue">
-							<i class="fa fa-search"></i>
-						</button> </span>
-				</div>
                     </form>
 			</div>
 		</div>
@@ -46,11 +39,10 @@
 		<thead>
 			<tr>
 				<th><h4 class="text-center">Serial No.</h4></th>
+                                 <th><h4 class="text-center">Date</h4></th>
                                 <th><h4 class="text-center">Transaction</h4></th>
-				<th><h4 class="text-center">Brand Name</h4></th>
-				<th><h4 class="text-center">Model No.</h4></th>
-				<th><h4 class="text-center">Amount</h4></th>
-				<th><h4 class="text-center">Price</h4></th>
+				<th><h4 class="text-center">Product Amount</h4></th>
+				<th><h4 class="text-center">Total Price</h4></th>
 			</tr>
 		</thead>
 		<tbody id="tbody">

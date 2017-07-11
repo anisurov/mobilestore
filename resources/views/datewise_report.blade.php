@@ -30,13 +30,6 @@
 						<input type="text" name="to_date" id="to_date"  class="form-control text-center" value="" placeholder="To date"/>
 					</div>
 				</div>
-
-				<div class="col-md-2">
-					<span class="input-group-btn">
-						<button type="submit" id="submit_form" class="btn blue">
-							<i class="fa fa-search"></i>
-						</button> </span>
-				</div>
                     </form>
 			</div>
 		</div>

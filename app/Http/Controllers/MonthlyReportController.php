@@ -17,12 +17,17 @@ class  MonthlyReportController extends Controller
     }
     public function report(Request $request)
     {
-           $fromdata=$request-> input('from_date');
-        $todate=$request -> input('to_date');
+           $fromdata=$request-> input('fromdate');
+           $time = new DateTime($fromdata);
+        $todate=$request -> input('todate');
+        $date = $fromdata->format('n.j.Y');
+        echo $date;
+//$time = $time->format('H:i');
         $data=DB::select('select * from product_entry where date>="'.$fromdata.'" && date<="'.$todate.'"');
+        var_dump($data);
         if($data)
         {    
-        return view('home');
+        return view('monthly_report');
         }
         else
         {

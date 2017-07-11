@@ -5,7 +5,7 @@ $('document').ready(function() {
 		var brandname = $(this).val();
 		//console.log(stateID);
 
-		if (brandname!='') {
+		if (brandname != '') {
 
 			$.ajax({
 
@@ -23,8 +23,9 @@ $('document').ready(function() {
 				success : function(data) {
 
 					if (!$.isEmptyObject(data)) {
+						$('select[name="modelno"]').empty();
+						$('select[name="modelno"]').append('<option value="">Select Model</option>');
 						$.each(data, function(i, value) {
-
 							console.log(value.model_no);
 							$('select[name="modelno"]').append('<option value="' + value.model_no + '">' + value.model_no + '</option>');
 
@@ -72,19 +73,13 @@ $('document').ready(function() {
 
 					if (!$.isEmptyObject(data)) {
 						$('#tbody').empty();
-						
+
 						$.each(data, function(i, value) {
-						var sl = i+1;
-			var str = ' <tr> '+
-           '<td> ' + sl + '</td>'+
-            '<td>' +brandname +'</td>'+
-            '<td class="text-right">' + modelno + '</td>'+
-            '<td class="text-right">' + value.amount + '</td>'+
-            '<td class="text-right">' + value.buyprice + '</td>'+
-         ' </tr> ';
-			$('#tbody').append(str);
+							var sl = i + 1;
+							var str = ' <tr> ' + '<td> ' + sl + '</td>' + '<td>' + brandname + '</td>' + '<td class="text-right">' + modelno + '</td>' + '<td class="text-right">' + value.amount + '</td>' + '<td class="text-right">' + value.buyprice + '</td>' + ' </tr> ';
+							$('#tbody').append(str);
 						});
-					}else{
+					} else {
 						$('#tbody').empty();
 						$('#tbody').append('        This model is not available');
 					}

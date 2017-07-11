@@ -48,19 +48,20 @@ $('document').ready(function() {
 		var ou = cloned.find('input[name="price[]"]').attr('id', length + 1);
 		var ou = cloned.find('input[name="amount[]"]').attr('id', length + 1);
 		console.log(ou);
-		$('#products').append(cloned).value('');
-		
+		$('#products').append(cloned).val('');
+
 	});
 
 	$('.brand').change(function() {
 
-		console.log('ovii');
+		//console.log('ovii');
 		var stateID = $(this).val();
 		var ID = $(this).attr('id');
 
-		console.log(ID);
-		console.log('ovii');
-		console.log(stateID);
+		/*
+		 console.log(ID);
+		 console.log('ovii');
+		 console.log(stateID);*/
 
 		if (stateID != '') {
 
@@ -83,6 +84,9 @@ $('document').ready(function() {
 					console.log("returned data" + data);
 
 					if (!$.isEmptyObject(data)) {
+						$('select[name="modelno[]"][id="' + ID + '"]').empty();
+						$('select[name="modelno[]"][id="' + ID + '"]').append('<option value="">Select Model</option>');
+
 						$.each(data, function(i, value) {
 
 							console.log(value.model_no);
@@ -110,9 +114,9 @@ $('document').ready(function() {
 
 		var modelName = $(this).val();
 		var ID = $(this).attr('id');
-		console.log(ID);
+		console.log('model : ' + ID);
 
-		if (modelName!='') {
+		if (modelName != '') {
 
 			$.ajax({
 
@@ -130,18 +134,24 @@ $('document').ready(function() {
 				dataType : "json",
 
 				success : function(data) {
+					if (!$.isEmptyObject(data)) {
+						$('input[name="price[]"][ id = "' + ID + '"]').closest('.form-group').removeClass('has-error').addClass('has-success');
+						$('input[name="price[]"][ id = "' + ID + '"]').closest('.form-group').find('.help-block').html('');
+						$('input[name="price[]"][id="' + ID + '"]').val('');
+						//console.log("returned data" + data);
 
-					//$('input[name="price[]"]').val('');
+						$.each(data, function(i, value) {
 
-					console.log("returned data" + data);
+							//console.log(value.sellprice);
+							//$('input[name="price[]"]').append('<option value="' + value.sellprice + '">' + value.model_no + '</option>');
+							$('input[name="price[]"][id="' + ID + '"]').val(value.sellprice);
 
-					$.each(data, function(i, value) {
-
-						console.log(value.sellprice);
-						//$('input[name="price[]"]').append('<option value="' + value.sellprice + '">' + value.model_no + '</option>');
-						$('input[name="price[]"][id="' + ID + '"]').val(value.sellprice);
-
-					});
+						});
+					} else {
+						$('input[name="price[]"][id="' + ID + '"]').val('');
+						$('input[name="price[]"][id="' + ID + '"]').closest('.form-group').removeClass('has-success').addClass('has-error');
+						$('input[name="price[]"][id="' + ID + '"]').closest('.form-group').find('.help-block').html('Product Not Available');
+					}
 
 				}
 			});
@@ -153,20 +163,22 @@ $('document').ready(function() {
 
 	});
 
-	$('.amount').on('change', function() {
+	$('.amount,.price').on('change', function() {
 		var loopTotalIndex = $('.add').length;
 		var loopIndex;
-		var amount;
-		var price;
-		var total=0;
-		console.log(loopTotalIndex);
-		for(loopIndex = 1 ;loopIndex <= loopTotalIndex ; loopIndex++){
-			 amount = $('input[name="amount[]"][id="' + loopIndex + '"]').val();
-			 price = $('input[name="price[]"][id="' + loopIndex + '"]').val();
-	
+		var amount=0;
+		var price=0;
+		var total = 0;
+		console.log('t : ' + total);
+		for ( loopIndex = 1; loopIndex <= loopTotalIndex; loopIndex++) {
+			amount = $('input[name="amount[]"][id="' + loopIndex + '"]').val();
+			price = $('input[name="price[]"][id="' + loopIndex + '"]').val();
+			console.log('a:' + amount);
+			console.log('p:' + price);
+
 			if (amount && price) {
-	
-				total = total + amount * price;				
+
+				total = total + amount * price;
 			}
 		}
 		$('input[name="total"]').val(total);
@@ -195,7 +207,7 @@ $('document').ready(function() {
 	$("#register").validate({
 
 		rules : {
-			ignore: [],
+			ignore : [],
 			cmobileNum : {
 				required : true,
 				validno : true

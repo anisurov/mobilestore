@@ -63,6 +63,7 @@ class ProductEntryController extends Controller {
 		}
 		if ($request -> input('addm') == 'true') {
 			$brandnames = DB::select('select brandname from brand');
+			Session::flash('success', 'Your Product Entry was Successful!!');
 			return view('productentry', compact('brandnames'));
 		} else {
 

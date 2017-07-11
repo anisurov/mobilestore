@@ -75,7 +75,7 @@ class SellProductController extends Controller {
 		$totalValue = count($brandnames);
 
 		for ($index = 0; $index < $totalValue; $index++) {
-
+			if($brandnames[$index]&&$modelno[$index]&&$sellprice[$index]&&$amounts[$index]){
 			$brand = DB::select('select brand_id from brand where brandname = "' . $brandnames[$index] . '"');
 
 			foreach ($brand as $key => $value) {
@@ -115,6 +115,7 @@ class SellProductController extends Controller {
 		DB::select('update present_condition set amount="'.$amount.'" where brand_id="' . $brandID . '" and model_id ="' . $modelID . '"');
 		
 		DB::table('product_sell') -> insert($data);	 
+		}
 		}
 
 	

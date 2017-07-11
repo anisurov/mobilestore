@@ -6,10 +6,10 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
+			<div class="panel panel-info">
 				
-				<div class="panel-heading">
-					Entry Product Here
+				<div class="panel-heading text-center">
+					<strong> Sell Product </strong>
 				</div>
 				
 				<div class="panel-body">
@@ -79,7 +79,7 @@
 										<div class="input-group-addon">
 											<i class="fa fa-plus"></i> Unit Price
 										</div>
-										<input type="text" name="price[]" id="1" class="form-control">
+										<input type="text" name="price[]" id="1" class="form-control price">
 									</div>
 									<span class="help-block" id="error"></span>
 								</div>

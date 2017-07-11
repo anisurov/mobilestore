@@ -4,9 +4,15 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
+            <div class="panel panel-info">
+            	@if (Session::has('success'))
+				<div class="alert alert-success alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+					{{Session::get('success')}}
+				</div>
+				@endif
                 <div class="panel-heading">
-                    Entry Brand Name Here
+                    <b>Entry Brand Name Here</b>
                 </div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action='brandEntry'>
@@ -23,7 +29,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     Done
                                 </button>
-                                <a type="submit" class="btn btn-link" href="brandname"> Add more ? </a>
+                                <button type="submit" name="addm" value="true" class="btn btn-primary">
+									Add more ?
+								</button>
                             </div>
                         </div>
 
@@ -32,9 +40,9 @@
                 </div>
 
             </div>
-            <div class="panel panel-default">
+            <div class="panel panel-info">
                 <div class="panel-heading">
-                    Existed Brand
+                   <b> Existed Brand </b>
                 </div>
                 <div class="panel-body">
                     

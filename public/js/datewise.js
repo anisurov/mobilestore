@@ -29,7 +29,7 @@ $('document').ready(function () {
                             var sl = i + 1;
                             var str = ' <tr> ' +
                                     '<td class="text-center"> ' + sl + '</td>' +
-                                    '<td class="text-center">buy</td>' +
+                                    '<td class="text-center">'+ value.transaction+'</td>' +
                                     '<td class="text-center">' + value.brandname + '</td>' +
                                     '<td class="text-center">' + value.modelno + '</td>' +
                                     '<td class="text-center">' + value.amount + '</td>' +

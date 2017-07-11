@@ -3,6 +3,7 @@
 @section('content')
 <link href="{{ asset('bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('css/components.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('jquery-ui/jquery-ui.min.css') }}" rel="stylesheet" type="text/css">
 <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('js/datewise.js') }}"></script>
 <script src="{{ asset('jquery-ui/jquery-ui.min.js') }}"></script>
@@ -67,7 +68,7 @@
 	<hr />
 </div>
 <script type="text/javascript">
-	jQuery("#from_date, #to_date").datetimepicker({
+	jQuery("#from_date, #to_date").datepicker({
 		autoclose : true,
 		isRTL : Metronic.isRTL(),
 		dateFormat: "yy-mm-dd",

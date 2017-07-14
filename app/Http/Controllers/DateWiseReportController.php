@@ -12,7 +12,9 @@ class DateWiseReportController extends Controller {
     }
 
     public function index() {
-        return view('datewise_report');
+        $data=DB::select('select *from product_entry where date(date)=CURDATE()');
+        $data1=DB::select('select *from product_sell where date(date)=CURDATE()');
+        return view('datewise_report',compact('data','data1'));
     }
 
     public function report(Request $request) {

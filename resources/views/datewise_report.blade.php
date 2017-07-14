@@ -25,7 +25,7 @@
 				{{ csrf_field() }}
 				<div class="col-md-6">
 					<div class="input-group input-xlarge datetimepicker">
-						<input type="text" name="from_date" id="from_date"  class="form-control text-center" value="" placeholder="From date" />
+						<input type="text" name="from_date" id="from_date"  class="form-control text-center" value="" placeholder="Select date" />
 					</div>
 				</div>
                     </form>
@@ -49,7 +49,33 @@
 			</tr>
 		</thead>
 		<tbody id="tbody">
-      
+       <?php
+        foreach ($data as $key => $value) {
+            $brandID = $value->brand_id;
+            $brandnames = DB::select('select brandname from brand where brand_id="' . $brandID . '"');
+            foreach ($brandnames as $key1 => $value1) {
+                $brandname = $value1->brandname;
+            }
+            $modelID = $value->model_id;
+            $models = DB::select('select model_no from model where brand_id  = "' . $brandID . '" AND model_id ="' . $modelID . '"');
+            foreach ($models as $key2 => $value2) {
+                $model = $value2->model_no;
+            }
+            $amount = $value->amount;
+            $buyprice = $value->buyprice;
+            $sellprice = $value->sellprice;
+            $sl = $key + 1;
+            if($sl&&$brandnames&&$models&&$amount&&$buyprice){
+            echo ' <tr>
+            <td class="text-center">' . $sl . '</td>
+            <td class="text-center"> Buy </td>
+            <td class="text-center">' . $brandname . '</td>
+            <td class="text-center">' . $model . '</td>
+            <td class="text-center">' . $amount . '</td>
+            <td class="text-center">' . $buyprice . '</td>
+            </tr> ';}
+        }
+        ?>
 		</tbody>
 	</table>
         	<table class="table table-bordered">
@@ -67,7 +93,33 @@
 			</tr>
 		</thead>
 		<tbody id="t1body">
-      
+               <?php
+        foreach ($data1 as $key => $value) {
+            $brandID = $value->brand_id;
+            $brandnames = DB::select('select brandname from brand where brand_id="' . $brandID . '"');
+            foreach ($brandnames as $key1 => $value1) {
+                $brandname = $value1->brandname;
+            }
+            $modelID = $value->model_id;
+            $models = DB::select('select model_no from model where brand_id  = "' . $brandID . '" AND model_id ="' . $modelID . '"');
+            foreach ($models as $key2 => $value2) {
+                $model = $value2->model_no;
+            }
+            $amount = $value->amount;
+            $buyprice = $value->buyprice;
+            $sellprice = $value->sellprice;
+            $sl = $key + 1;
+            if($sl&&$brandnames&&$models&&$amount&&$buyprice){
+            echo ' <tr>
+            <td class="text-center">' . $sl . '</td>
+                 <td class="text-center"> Sell </td>
+            <td class="text-center">' . $brandname . '</td>
+            <td class="text-center">' . $model . '</td>
+            <td class="text-center">' . $amount . '</td>
+            <td class="text-center">' . $sellprice . '</td>
+            </tr> ';}
+        }
+        ?>
 		</tbody>
 	</table>
 	<div class="row text-right">

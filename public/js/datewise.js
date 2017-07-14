@@ -23,10 +23,11 @@ $('document').ready(function () {
 
                     if (!$.isEmptyObject(data)) {
                         $('#tbody').empty();
-
+                         $k=1;$j=1;
                         $.each(data, function (i, value) {
-
-                            var sl = i + 1;
+                            if(value.transaction=='buy')
+                            {
+                            var sl = $j;
                             var str = ' <tr> ' +
                                     '<td class="text-center"> ' + sl + '</td>' +
                                     '<td class="text-center">'+ value.transaction+'</td>' +
@@ -36,6 +37,22 @@ $('document').ready(function () {
                                     '<td class="text-center">' + value.buyprice + '</td>' +
                                     ' </tr> ';
                             $('#tbody').append(str);
+                            $j=$j+1;
+                        }
+                                if(value.transaction=='sell')
+                            {
+                            var sl = $k;
+                            var str = ' <tr> ' +
+                                    '<td class="text-center"> ' + sl + '</td>' +
+                                    '<td class="text-center">'+ value.transaction+'</td>' +
+                                    '<td class="text-center">' + value.brandname + '</td>' +
+                                    '<td class="text-center">' + value.modelno + '</td>' +
+                                    '<td class="text-center">' + value.amount + '</td>' +
+                                    '<td class="text-center">' + value.buyprice + '</td>' +
+                                    ' </tr> ';
+                            $('#t1body').append(str);
+                            $k=$k+1;
+                        }
                         });
                     } else {
                         $('#tbody').empty();

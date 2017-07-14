@@ -17,9 +17,8 @@ class DateWiseReportController extends Controller {
 
     public function report(Request $request) {
         $fromdata = $request->input('fromdate');
-        $todate = $request->input('todate');
 
-        $data = DB::select('select * from product_entry where date>="' . $fromdata . '" && date<="' . $todate . '"');
+        $data = DB::select('select * from product_entry where date(date)="'.$fromdata.'"');
         //$returnData=  array();
           $i=0;
         if ($data) {
@@ -40,7 +39,7 @@ class DateWiseReportController extends Controller {
             $i=$i+1;
                 
                 }
-            $data = DB::select('select * from product_sell where date>="' . $fromdata . '" && date<="' . $todate . '"');
+            $data = DB::select('select * from product_sell where date(date)="' . $fromdata . '"');
             foreach ($data as $key => $value) {
 
                 $modelid = $value->model_id;

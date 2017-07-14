@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Entry Product Here')
+@section('title','Daily Report Here')
 @section('content')
 <link href="{{ asset('bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('css/components.css') }}" rel="stylesheet" type="text/css">
@@ -26,8 +26,6 @@
 				<div class="col-md-6">
 					<div class="input-group input-xlarge datetimepicker">
 						<input type="text" name="from_date" id="from_date"  class="form-control text-center" value="" placeholder="From date" />
-						<span class="input-group-addon"> to </span>
-						<input type="text" name="to_date" id="to_date"  class="form-control text-center" value="" placeholder="To date"/>
 					</div>
 				</div>
                     </form>
@@ -37,6 +35,9 @@
 	<hr/>
 	<!-- / end client details section -->
 	<table class="table table-bordered">
+             <div class="row">
+            <caption class="text-center"><h4 class="text-center">Buy Transaction</h4></caption>
+            </div>
 		<thead>
 			<tr>
 				<th><h4 class="text-center">Serial No.</h4></th>
@@ -51,6 +52,24 @@
       
 		</tbody>
 	</table>
+        	<table class="table table-bordered">
+                     <div class="row">
+            <caption class="text-center"><h4 class="text-center">Sell Transaction</h4></caption>
+            </div>
+		<thead>
+			<tr>
+				<th><h4 class="text-center">Serial No.</h4></th>
+                                <th><h4 class="text-center">Transaction</h4></th>
+				<th><h4 class="text-center">Brand Name</h4></th>
+				<th><h4 class="text-center">Model No.</h4></th>
+				<th><h4 class="text-center">Amount</h4></th>
+				<th><h4 class="text-center">Price</h4></th>
+			</tr>
+		</thead>
+		<tbody id="t1body">
+      
+		</tbody>
+	</table>
 	<div class="row text-right">
 		<div class="col-xs-2 col-xs-offset-8">
 			<p>
@@ -61,7 +80,7 @@
 	<hr />
 </div>
 <script type="text/javascript">
-	jQuery("#from_date, #to_date").datepicker({
+	jQuery("#from_date").datepicker({
 		autoclose : true,
 		isRTL : Metronic.isRTL(),
 		dateFormat: "yy-mm-dd",
@@ -70,19 +89,13 @@
 	jQuery("#submit_form").on("click", function() {
 
 		var from_date = jQuery('#from_date').val();
-		var to_date = jQuery('#to_date').val();
 
-		if (from_date === '' || to_date === '') {
+		if (from_date === '') {
 
 			if (from_date === '') {
 				jQuery('#from_date').addClass('is_required');
 			} else {
 				jQuery('#from_date').removeClass('is_required');
-			}
-			if (to_date === '') {
-				jQuery('#to_date').addClass('is_required');
-			} else {
-				jQuery('#to_date').removeClass('is_required');
 			}
 			return false;
 

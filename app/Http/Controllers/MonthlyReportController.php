@@ -21,6 +21,7 @@ class  MonthlyReportController extends Controller
         $data=DB::select('select date(date) as date,sum(sellprice*amount) as price,sum(amount) as amount from product_sell where '
                 . 'date>= "' . $fromdata . '" AND date<="' . $todate . '" group by date(date)');
         //var_dump($data);
+        
         if($data)
         {    
              $i=0;
@@ -29,6 +30,7 @@ class  MonthlyReportController extends Controller
                 $date = $value->date;
                 $price = $value->price;
                 $amount = $value->amount;
+                
                     $returnData[$i] = array('transaction' => 'sell','date' => $date, 'price' => $price, 'amount' => $value->amount);
             $i=$i+1;
          }

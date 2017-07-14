@@ -1,5 +1,5 @@
 @extends('layouts.app') 
-@section('title','Entry Product Here')
+@section('title','Entry Model No. Here')
 @section('content')
 <script src="{{ asset('js/brand.showtabledata.js') }}"></script>
 <div class="container">

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Entry Product Here')
+@section('title','Date wise Report Here')
 @section('content')
 <link href="{{ asset('bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('css/components.css') }}" rel="stylesheet" type="text/css">
@@ -36,7 +36,10 @@
 	<hr/>
 	<!-- / end client details section -->
 	<table class="table table-bordered">
-		<thead>
+            <div class="row">
+            <caption class="text-center"><h4 class="text-center">Buy Transaction</h4></caption>
+            </div>
+            <thead>
 			<tr>
 				<th><h4 class="text-center">Serial No.</h4></th>
                                  <th><h4 class="text-center">Date</h4></th>
@@ -46,6 +49,23 @@
 			</tr>
 		</thead>
 		<tbody id="tbody">
+      
+		</tbody>
+	</table>
+        <table class="table table-bordered">
+             <div class="row">
+            <caption class="text-center"><h4 class="text-center">Sell Transaction</h4></caption>
+            </div>
+		<thead>
+			<tr>
+				<th><h4 class="text-center">Serial No.</h4></th>
+                                 <th><h4 class="text-center">Date</h4></th>
+                                <th><h4 class="text-center">Transaction</h4></th>
+				<th><h4 class="text-center">Product Amount</h4></th>
+				<th><h4 class="text-center">Total Price</h4></th>
+			</tr>
+		</thead>
+		<tbody id="t1body">
       
 		</tbody>
 	</table>

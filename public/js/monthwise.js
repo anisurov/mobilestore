@@ -18,11 +18,12 @@ $('document').ready(function () {
                 },
                 dataType: "json",
                 success: function (data) {
-
+ $('#tbody').empty();
+  $('#t1body').empty();
                     console.log("returned data" + data);
 
                     if (!$.isEmptyObject(data)) {
-                        $('#tbody').empty();
+                       
                        $k=1;$j=1;
                         $.each(data, function (i, value) {
                             if(value.transaction=='buy')
@@ -31,7 +32,6 @@ $('document').ready(function () {
                             var str = ' <tr> ' +
                                     '<td class="text-center"> ' + sl + '</td>' +
                                     '<td class="text-center">'+ value.date+'</td>' +
-                                    '<td class="text-center">' + value.transaction + '</td>' +
                                     '<td class="text-center">' + value.amount + '</td>' +
                                     '<td class="text-center">' + value.price + '</td>' +
                                     ' </tr> ';
@@ -45,7 +45,6 @@ $('document').ready(function () {
                             var str = ' <tr> ' +
                                     '<td class="text-center"> ' + sl + '</td>' +
                                     '<td class="text-center">'+ value.date+'</td>' +
-                                    '<td class="text-center">' + value.transaction + '</td>' +
                                     '<td class="text-center">' + value.amount + '</td>' +
                                     '<td class="text-center">' + value.price + '</td>' +
                                     ' </tr> ';

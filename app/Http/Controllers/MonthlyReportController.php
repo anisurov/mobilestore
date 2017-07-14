@@ -11,7 +11,11 @@ class  MonthlyReportController extends Controller
     }
 	public function index()
     {
-      return view('monthly_report');
+            $data=DB::select('select date(date) as date,sum(sellprice*amount) as price,sum(amount) as amount from product_sell where 
+               date(date)<=CURDATE() AND date(date)>=DATE_SUB(CURDATE(), INTERVAL 10 DAY) group by date(date)');
+                $data1=DB::select('select date(date) as date,sum(sellprice*amount) as price,sum(amount) as amount from product_entry where 
+               date(date)<=CURDATE() AND date(date)>=DATE_SUB(CURDATE(), INTERVAL 10 DAY) group by date(date)');
+      return view('monthly_report',compact('data','data1'));
     }
     public function report(Request $request)
     {
@@ -19,7 +23,7 @@ class  MonthlyReportController extends Controller
              $todate=$request-> input('todate');
        
         $data=DB::select('select date(date) as date,sum(sellprice*amount) as price,sum(amount) as amount from product_sell where '
-                . 'date>= "' . $fromdata . '" AND date<="' . $todate . '" group by date(date)');
+                . 'date(date)>= "' . $fromdata . '" AND date(date)<="' . $todate . '" group by date(date)');
         //var_dump($data);
         
         if($data)
@@ -35,7 +39,7 @@ class  MonthlyReportController extends Controller
             $i=$i+1;
          }
           $data=DB::select('select date(date) as date,sum(sellprice*amount) as price,sum(amount) as amount from product_entry where '
-                . 'date>= "' . $fromdata . '" AND date<="' . $todate . '" group by date(date)');
+                . 'date(date)>= "' . $fromdata . '" AND date(date)<="' . $todate . '" group by date(date)');
                    foreach ($data as $key => $value) {
 
                 $date = $value->date;
@@ -45,10 +49,6 @@ class  MonthlyReportController extends Controller
             $i=$i+1;
          }
          return json_encode($returnData);
-        }
-        else
-        {
-            return view('home');
         }
     }
 }

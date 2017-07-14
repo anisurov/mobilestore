@@ -46,13 +46,26 @@
 							<tr>
 								<th><h4 class="text-center">Serial No.</h4></th>
 								<th><h4 class="text-center">Date</h4></th>
-								<th><h4 class="text-center">Transaction</h4></th>
 								<th><h4 class="text-center">Product Amount</h4></th>
 								<th><h4 class="text-center">Total Price</h4></th>
 							</tr>
 						</thead>
 						<tbody id="tbody">
-
+                                                       <?php
+        foreach ($data1 as $key => $value) {
+            $date=$value->date;
+            $amount = $value->amount;
+            $price = $value->price;
+            $sl = $key + 1;
+            if($sl&&$date&&$amount&&$price){
+            echo ' <tr>
+            <td class="text-center">' . $sl . '</td>
+            <td class="text-center">' . $date . '</td>
+            <td class="text-center">' . $amount . '</td>
+            <td class="text-center">' . $price . '</td>
+            </tr> ';}
+        }
+        ?>
 						</tbody>
 					</table>
 				</div>
@@ -73,13 +86,26 @@
 								<tr>
 									<th><h4 class="text-center">Serial No.</h4></th>
 									<th><h4 class="text-center">Date</h4></th>
-									<th><h4 class="text-center">Transaction</h4></th>
 									<th><h4 class="text-center">Product Amount</h4></th>
 									<th><h4 class="text-center">Total Price</h4></th>
 								</tr>
 							</thead>
 							<tbody id="t1body">
-
+                                                                                                       <?php
+        foreach ($data as $key => $value) {
+            $date=$value->date;
+            $amount = $value->amount;
+            $price = $value->price;
+            $sl = $key + 1;
+            if($sl&&$date&&$amount&&$price){
+            echo ' <tr>
+            <td class="text-center">' . $sl . '</td>
+            <td class="text-center">' . $date . '</td>
+            <td class="text-center">' . $amount . '</td>
+            <td class="text-center">' . $price . '</td>
+            </tr> ';}
+        }
+        ?>
 							</tbody>
 						</table>
 					</div>

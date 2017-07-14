@@ -11,7 +11,7 @@
         <li class="{{Request::is('/') ? "active" : "" }}"><a href="{{ url('/') }}">Home</a></li>
         <li class="{{Request::is('productentry') ? "active" : "" }}"><a href="{{ url('/productentry') }}">EntryProduct</a></li>
         <li class="{{Request::is('sellproduct') ? "active" : "" }}"><a href="{{ url('/sellproduct') }}">Sell Product</a></li>
-        <li class="{{Request::is('check') ? "active" : "" }}"><a href="{{ url('/check') }}">Available Product</a></li>
+        <li class="{{Request::is('check') ? "active" : "" }}"><a href="{{ url('/check') }}">Check Product</a></li>
         <li class="{{Request::is('reportdate') ? "active" : "" }}"><a href="{{ url('/reportdate') }}">Daily Report</a></li>
         <li class="{{Request::is('reportmonthly') ? "active" : "" }}"><a href="{{ url('/reportmonthly') }}">Datewise Report</a></li>
           </ul>

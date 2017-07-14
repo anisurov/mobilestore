@@ -24,7 +24,7 @@ $('document').ready(function() {
 
 					if (!$.isEmptyObject(data)) {
 						$('select[name="modelno"]').empty();
-						$('select[name="modelno"]').append('<option value="">Select Model</option>');
+						$('select[name="modelno"]').append('<option value="">---Select Model---</option>');
 						$.each(data, function(i, value) {
 							console.log(value.model_no);
 							$('select[name="modelno"]').append('<option value="' + value.model_no + '">' + value.model_no + '</option>');
@@ -33,7 +33,7 @@ $('document').ready(function() {
 					} else {
 
 						$('select[name="modelno"]').empty();
-						$('select[name="modelno"]').append('<option value="">Select Model</option>');
+						$('select[name="modelno"]').append('<option value="">---Select Model---</option>');
 					}
 				}
 			});
@@ -41,7 +41,7 @@ $('document').ready(function() {
 		} else {
 
 			$('select[name="modelno"]').empty();
-			$('select[name="modelno"]').append('<option value="">Select Model</option>');
+			$('select[name="modelno"]').append('<option value="">---Select Model---</option>');
 		}
 
 	});

@@ -56,7 +56,7 @@
             </div>
             <div class="panel panel-info">
                 <div class="panel-heading">
-                   <b> Existed Brand </b>
+                   <b> Existed Model </b>
                 </div>
                 <div class="panel-body">
 						<div class="row">

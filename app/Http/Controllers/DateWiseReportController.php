@@ -41,8 +41,11 @@ class DateWiseReportController extends Controller {
             $i=$i+1;
                 
                 }
-            $data = DB::select('select * from product_sell where date(date)="' . $fromdata . '"');
-            foreach ($data as $key => $value) {
+        }
+                
+            $sellData = DB::select('select * from product_sell where date(date)="' . $fromdata . '"');
+            if($sellData){
+            foreach ($sellData as $key => $value) {
 
                 $modelid = $value->model_id;
                 $brandid = $value->brand_id;
@@ -59,10 +62,11 @@ class DateWiseReportController extends Controller {
             $i=$i+1;
                 
                 }
+            }
+                
             return json_encode($returnData);
-        } else {
-            return view('home');
-        }
+        
+        
     }
 
 }

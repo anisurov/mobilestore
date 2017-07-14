@@ -166,8 +166,8 @@ $('document').ready(function() {
 	$('.amount,.price').on('change', function() {
 		var loopTotalIndex = $('.add').length;
 		var loopIndex;
-		var amount=0;
-		var price=0;
+		var amount = 0;
+		var price = 0;
 		var total = 0;
 		console.log('t : ' + total);
 		for ( loopIndex = 1; loopIndex <= loopTotalIndex; loopIndex++) {
@@ -204,6 +204,65 @@ $('document').ready(function() {
 		return this.optional(element) || numregex.test(value);
 	});
 
+	$.validator.addMethod("availability", function(value, element) {
+		var ID = $(element).attr('id');
+		var amount = value;
+		var test = 'baal';
+		if (amount <= 0)
+			return false;
+		else {
+			amountData(amount, ID, function(data) {
+				test = data;
+			});
+			if (test === 'true') {
+				return true;
+			} else
+				return false;
+		}
+
+		//return this.optional(element) || numregex.test(value);
+	});
+
+	function amountData(amount, ID, callback) {
+		$.ajax({
+
+			url : '/sapi',
+			type : "POST",
+			data : {
+				modelno : $('select[name="modelno[]"][id="' + ID + '"]').val(),
+				brandname : $('select[name="brandname[]"][id="' + ID + '"]').val(),
+				info : 'amo'
+			},
+
+			headers : {
+				'X-CSRF-Token' : $('input[name="_token"]').val()
+			},
+
+			dataType : "json",
+			async : false,
+			success : function(data) {
+				var result;
+				if (!$.isEmptyObject(data)) {
+
+					$.each(data, function(i, value) {
+						console.log(amount);
+						if (value.amount >= amount) {
+							test = value.amount;
+							console.log(i + '  v::' + test);
+							result = 'true';
+						} else
+							result = 'false';
+					});
+				} else {
+					result = 'false';
+				}
+				callback(result);
+
+			}
+		});
+	}
+
+
 	$("#register").validate({
 
 		rules : {
@@ -214,7 +273,8 @@ $('document').ready(function() {
 			},
 			'amount[]' : {
 				required : true,
-				numeric : true
+				numeric : true,
+				availability : true
 			},
 			cname : {
 				required : true,
@@ -228,7 +288,8 @@ $('document').ready(function() {
 		messages : {
 			'amount[]' : {
 				required : "Please Enter Amount Of Product",
-				numeric : "Enter Valid Amount"
+				numeric : "Enter Valid Amount",
+				availability : "Not available"
 			},
 			cmobileNum : {
 				required : "Please Enter Mobile Number",

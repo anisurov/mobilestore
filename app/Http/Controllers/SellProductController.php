@@ -18,7 +18,7 @@ class SellProductController extends Controller {
 
 	public function api(Request $request) {
 
-		if ($request -> input('brandname') && !$request -> input('modelno')) {
+		if (!$request -> input('modelno') && $request -> input('brandname')&& !$request -> input('info')) {
 
 			$brandname = $request -> input('brandname');
 
@@ -27,7 +27,7 @@ class SellProductController extends Controller {
 			$data = DB::select('select model_no from model where brand_id = (select brand_id from brand   where brandname="' . $brandname . '")');
 
 			return json_encode($data);
-		} elseif ($request -> input('modelno') && $request -> input('brandname')) {
+		} elseif ($request -> input('modelno') && $request -> input('brandname')&& !$request -> input('info')) {
 			$modelno = $request -> input('modelno');
 			$bid = $request -> input('brandname');
 			$modelId = DB::select('select model_id from model where brand_id = (select brand_id from brand   where brandname="' . $bid . '") and model_no="' . $modelno . '"');
@@ -39,7 +39,19 @@ class SellProductController extends Controller {
 			$price = DB::select('select sellprice from present_condition where brand_id  =(select brand_id from brand ' . 'where brandname="' . $bid . '") and model_id = "' . $mid . '"');
 
 			return json_encode($price);
-		} elseif ($request -> input('mblno')) {
+		}elseif ($request -> input('modelno') && $request -> input('brandname')&& $request -> input('info')) {
+			$modelno = $request -> input('modelno');
+			$bid = $request -> input('brandname');
+			$modelId = DB::select('select model_id from model where brand_id = (select brand_id from brand   where brandname="' . $bid . '") and model_no="' . $modelno . '"');
+
+			foreach ($modelId as $key => $value) {
+				$mid = $value -> model_id;
+			}
+
+			$price = DB::select('select amount from present_condition where brand_id  =(select brand_id from brand ' . 'where brandname="' . $bid . '") and model_id = "' . $mid . '"');
+
+			return json_encode($price);
+		}elseif ($request -> input('mblno')) {
 			$mobile = $request -> input('mblno');
 			$customerName = DB::select('SELECT name FROM `customer` WHERE mobile="' . $mobile . '"');
 			if ($customerName)

@@ -1,73 +1,149 @@
 @extends('layouts.app')
-@section('title','Entry Product Here')
+@section('title','Daily Report Here')
 @section('content')
 <link href="{{ asset('bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" type="text/css">
-<link href="{{ asset('jquery-ui/jquery-ui.min.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('css/components.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('jquery-ui/jquery-ui.min.css') }}" rel="stylesheet" type="text/css">
 <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
-<script src="{{ asset('js/availProduct.js') }}"></script>
+<script src="{{ asset('js/datewise.js') }}"></script>
 <script src="{{ asset('jquery-ui/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
 <script src="{{ asset('js/metronic.js') }}"></script>
+
 <div class="container">
 	<div class="row">
-		<div class="col-xs-6">
-			<h1> {{ config('app.name') }} </h1>
-		</div>
-		<div class="col-xs-6 text-right">
-			<h1>INVOICE</h1>
-		</div>
-	</div>
-	<div class="row">
-		<div class="panel-body">
-				{{ csrf_field() }}
-				<div class="col-md-6">
-					<div class="input-group input-xlarge datetimepicker">
-						<input type="text" name="from_date" id="from_date"  class="form-control text-center" value="" placeholder="From date" />
-						<span class="input-group-addon"> to </span>
-						<input type="text" name="to_date" id="to_date"  class="form-control text-center" value="" placeholder="To date"/>
-					</div>
+		<div class="col-md-8 col-md-offset-2">
+			<div class="panel panel-info">
+				<div class="panel-heading text-center">
+					<strong> Date Selection </strong>
 				</div>
+				<div class="panel-body">
+					<form class="form-horizontal col-md-4 col-md-offset-2" id="register" role="form" method="POST" action="reportmonthly2">
+						{{ csrf_field() }}
+						<div class="input-group input-xlarge datetimepicker">
+							<input type="text" name="from_date" id="from_date"  class="form-control text-center" value="" placeholder="Enter date" />
+							</div>
 
-				<div class="col-md-2">
-					<span class="input-group-btn">
-						<button type="submit" id="submit_form" class="btn blue">
-							<i class="fa fa-search"></i>
-						</button> </span>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-6">
-			<div class="panel-body">
-				<div class="form-group">
-					<label for="modelno" class="col-md-4 control-label">Model No.</label>
-					<div class="col-md-6">
-						<select name="modelno" class="form-control" style="width:350px">
-							<option value="">--- Select Model ---</option>
-						</select>
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 	<hr/>
 	<!-- / end client details section -->
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th><h4>Serial No.</h4></th>
-				<th><h4>Brand Name</h4></th>
-				<th><h4>Model No.</h4></th>
-				<th><h4>Amount</h4></th>
-				<th><h4>Price</h4></th>
-			</tr>
-		</thead>
-		<tbody id="tbody">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="panel panel-info">
 
-		</tbody>
-	</table>
+				<div class="panel-heading text-center">
+					<strong> Buy Transaction </strong>
+				</div>
+
+				<div class="panel-body">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th><h4 class="text-center">Serial No.</h4></th>
+									<th><h4 class="text-center">Brand Name</h4></th>
+									<th><h4 class="text-center">Model No.</h4></th>
+									<th><h4 class="text-center">Product Amount</h4></th>
+									<th><h4 class="text-center">Price</h4></th>
+							</tr>
+						</thead>
+						<tbody id="tbody">
+                                                        <?php
+        foreach ($data as $key => $value) {
+            $brandID = $value->brand_id;
+            $brandnames = DB::select('select brandname from brand where brand_id="' . $brandID . '"');
+            foreach ($brandnames as $key1 => $value1) {
+                $brandname = $value1->brandname;
+            }
+            $modelID = $value->model_id;
+            $models = DB::select('select model_no from model where brand_id  = "' . $brandID . '" AND model_id ="' . $modelID . '"');
+            foreach ($models as $key2 => $value2) {
+                $model = $value2->model_no;
+            }
+            $amount = $value->amount;
+            $buyprice = $value->buyprice;
+            $sellprice = $value->sellprice;
+            $sl = $key + 1;
+            if($sl&&$brandnames&&$models&&$amount&&$buyprice){
+            echo ' <tr>
+            <td class="text-center">' . $sl . '</td>
+            <td class="text-center">' . $brandname . '</td>
+            <td class="text-center">' . $model . '</td>
+            <td class="text-center">' . $amount . '</td>
+            <td class="text-center">' . $buyprice . '</td>
+            </tr> ';}
+        }
+        ?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+				<div class="panel panel-info">
+
+					<div class="panel-heading text-center">
+						<strong> Sell Transaction </strong>
+					</div>
+
+					<div class="panel-body">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th><h4 class="text-center">Serial No.</h4></th>
+									<th><h4 class="text-center">Brand Name</h4></th>
+									<th><h4 class="text-center">Model No.</h4></th>
+									<th><h4 class="text-center">Product Amount</h4></th>
+									<th><h4 class="text-center">Price</h4></th>
+								</tr>
+							</thead>
+							<tbody id="t1body">
+                                                             <?php
+        foreach ($data1 as $key => $value) {
+            $brandID = $value->brand_id;
+            $brandnames = DB::select('select brandname from brand where brand_id="' . $brandID . '"');
+            foreach ($brandnames as $key1 => $value1) {
+                $brandname = $value1->brandname;
+            }
+            $modelID = $value->model_id;
+            $models = DB::select('select model_no from model where brand_id  = "' . $brandID . '" AND model_id ="' . $modelID . '"');
+            foreach ($models as $key2 => $value2) {
+                $model = $value2->model_no;
+            }
+            $amount = $value->amount;
+            $buyprice = $value->buyprice;
+            $sellprice = $value->sellprice;
+            $sl = $key + 1;
+            if($sl&&$brandnames&&$models&&$amount&&$buyprice){
+            echo ' <tr>
+            <td class="text-center">' . $sl . '</td>
+            <td class="text-center">' . $brandname . '</td>
+            <td class="text-center">' . $model . '</td>
+            <td class="text-center">' . $amount . '</td>
+            <td class="text-center">' . $sellprice . '</td>
+            </tr> ';}
+        }
+        ?>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="row text-right">
+				<div class="col-xs-2 col-xs-offset-8">
+					<p>
+
+					</p>
+				</div>
+			</div>
+			<hr />
+		</div>
+	</div>
 	<div class="row text-right">
 		<div class="col-xs-2 col-xs-offset-8">
 			<p>
@@ -77,29 +153,24 @@
 	</div>
 	<hr />
 </div>
+</div>
 <script type="text/javascript">
-	jQuery("#from_date, #to_date").datepicker({
+	jQuery("#from_date").datepicker({
 		autoclose : true,
 		isRTL : Metronic.isRTL(),
-		format : "yyyy-mm-dd",
+		dateFormat : "yy-mm-dd",
 		pickerPosition : (Metronic.isRTL() ? "bottom-right" : "bottom-left")
 	});
 	jQuery("#submit_form").on("click", function() {
 
 		var from_date = jQuery('#from_date').val();
-		var to_date = jQuery('#to_date').val();
 
-		if (from_date === '' || to_date === '') {
+		if (from_date === '') {
 
 			if (from_date === '') {
 				jQuery('#from_date').addClass('is_required');
 			} else {
 				jQuery('#from_date').removeClass('is_required');
-			}
-			if (to_date === '') {
-				jQuery('#to_date').addClass('is_required');
-			} else {
-				jQuery('#to_date').removeClass('is_required');
 			}
 			return false;
 

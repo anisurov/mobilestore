@@ -6,9 +6,15 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					Entry Product Here
+			<div class="panel panel-info">
+				@if (Session::has('success'))
+				<div class="alert alert-success alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+					{{Session::get('success')}}
+				</div>
+				@endif
+				<div class="panel-heading  text-center">
+					<strong>Entry Product Here</strong>
 				</div>
 				<div class="panel-body">
 					<form class="form-horizontal" id="register" role="form" method="POST" action="entry">
@@ -66,7 +72,9 @@
 								<button type="submit" class="btn btn-primary">
 									Done
 								</button>
-								<a class="btn btn-link" href="productentry"> Add more ? </a>
+								<button type="submit" name="addm" value="true" class="btn btn-primary">
+									Add more ?
+								</button>
 							</div>
 						</div>
 
